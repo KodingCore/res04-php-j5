@@ -1,0 +1,60 @@
+<?php
+
+require "User.php";
+
+$user = [
+    "firstName" => "Clark",
+    "lastName" => "Kent",
+    "email" => "clark.kent@test.fr"
+];
+
+$newUser = new User("Clark", "Kent", "clark.kent@test.fr");
+
+var_dump($newUser->getFirstName());
+
+
+$host = "db.3wa.io";
+$port = "3306";
+$dbname = "kevincorvaisier_phpj5";
+$connexionString = "mysql:host=$host;port=$port;dbname=$dbname";
+
+$user = "kevincorvaisier";
+$password = "04646b679a4ab0a202f8007ea81fe675";
+
+$db = new PDO(
+    $connexionString,
+    $user,
+    $password
+);
+
+$query = $db->prepare('SELECT * FROM users ORDER BY registration_date LIMIT 1');
+$query->execute();
+$user = $query->fetch(PDO::FETCH_ASSOC);
+var_dump($user);
+
+
+
+// if (isset($_GET['id'])) {
+//     var_dump("lol");
+//     $query = $db->prepare('SELECT * FROM users ORDER BY registration_date WHERE id = :id LIMIT 1');
+//     $parameters = [
+//     'id' => $_GET['id']
+//     ];
+//     $query->execute($parameters);
+//     $users = $query->fetch(PDO::FETCH_ASSOC);
+//     var_dump($users);
+// }
+
+
+?>
+
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
